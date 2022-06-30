@@ -1,0 +1,22 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+{% block title %}
+Detail
+{% endblock title %}
+
+{% block content %}
+<h2><u>Detail</u></h2>
+<h3>{% current_time '%d %b %Y' %}</h3>
+<p><h3>{{ news_detail.name|censor }}</h3></p>
+<p><u>{{ news_detail.dateCreation|date:'d-m-Y H:i' }}</u></p>
+<p>{{ news_detail.description|censor }}</p>
+<p>{{ news_detail.author }}</p>
+<p>{{ news_detail.category }}</p>
+<hr>
+<a href="{% url 'news_update' news_detail.id %}"><u> Редактировать статью</u><a/>
+<hr>
+<a href="{% url 'news_delete' news_detail.id %}"><u> Удалить статью</u><a/>
+<hr>
+{% endblock content %}
